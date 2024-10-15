@@ -13,7 +13,7 @@ class BukuController extends Controller
         $data_buku = Book::all()->sortByDesc('id');
         $data_buku = Book::orderBy('id', 'desc')->get();
         $res = 0;
-        $total=0;
+        $total = 0;
         foreach ($data_buku as $buku){
             $buku -> tgl_terbit = Carbon::createFromFormat('Y-m-d', $buku -> tgl_terbit);
             $res++;
