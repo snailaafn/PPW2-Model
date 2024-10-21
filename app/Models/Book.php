@@ -9,6 +9,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $table = 'books'; //buat inisialisasi tabel mana yang mau dipakai
+    protected $table = 'books'; 
+    protected $dates = ['tgl_terbit'];
 }
 

@@ -13,7 +13,7 @@ class BukuSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < 50; $i++){
             Book::create([
                 'judul' => fake()->sentence(3),
                 'penulis' => fake()->name(),
