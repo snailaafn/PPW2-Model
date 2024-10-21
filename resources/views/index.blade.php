@@ -2,7 +2,7 @@
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css"/>
 
     <style>
         .table thead th {
@@ -33,6 +33,7 @@
     @if (Session::has('pesan'))
         <div class="alert alert-success">{{Session::get('pesan')}}</div>
     @endif
+
     <table border="1" class="table table-striped" id="datatable">
         <thead>
             <tr>
@@ -83,12 +84,16 @@
     <div>
         <a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Buku</</a>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
     <script>
-        $(document).ready( function () {
-            $('#datatable').DataTable();
-    }   );
-</script>
+    //     $(document).ready( function () {
+    //         $('#datatable').DataTable();
+    // }   );
+    new DataTable('#datatable');
+    </script>
+
 </body>
 </html>
