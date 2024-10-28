@@ -47,6 +47,9 @@ class LoginRegisterController extends Controller
         // dd($request);
         $content = [
             'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'subject' => 'Judul Email Anda'
         ];
 
         $email = $request->email;

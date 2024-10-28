@@ -27,7 +27,7 @@ Route::put('/book/{id}', [BukuController::class, 'update'])->name('buku.update')
 // Route::get('/book/search', BukuController:@search)->name('buku.search');
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/register', 'register')->name('register');
-    Route::post('/store', 'store')->name('store');
+    Route::post('/store-regis', 'store')->name('store-regis');
     Route::get('/login', 'login')->name('login');
     Route::post('/authenticate', 'authenticate')->name('authenticate');
     Route::get('/dashboard', 'dashboard')->name('dashboard');

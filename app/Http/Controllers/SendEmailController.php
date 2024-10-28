@@ -6,17 +6,17 @@ use App\Mail\SendEmail;
 use App\Jobs\SendMailJob;
 class SendEmailController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $content = [
-        //     'name' => 'Ini Nama Pengirim',
-        //     'subject' => 'Ini subject email',
-        //     'body' => 'Ini adalah isi email yang dikirim dari laravel 10'
-        // ];
-
-        // Mail::to(' snailaafn27@gmail.com ')->send(new SendEmail($content));
-        // return "Email berhasil dikirim.";
-        return view('emails.kirim-email');
+        $content = [
+            'name' => 'Ini Nama Pengirim',
+            'subject' => 'Ini subject email',
+            'body' => 'Ini adalah isi email yang dikirim dari laravel 10'
+        ];
+        $email = $request->email;
+        Mail::to(users: $email)->send(new SendEmail($content));
+        return "Email berhasil dikirim.";
+        // return view('emails.kirim-email');
     }
     public function store(Request $request)
     {
