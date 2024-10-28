@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Jobs\SendMailJob;
+use App\Mail\SendEmail;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
+use Mail;
 
 class LoginRegisterController extends Controller
 {
@@ -40,6 +43,18 @@ class LoginRegisterController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
+
+        // dd($request);
+        $content = [
+            'name' => $request->name,
+        ];
+
+        $email = $request->email;
+        // dd(vars: $email);
+
+        Mail::to(users: $email)->send(new
+        SendEmail($content));
+
         return redirect()->route('dashboard')
             ->withSuccess('You have successfully registered & logged in!');
     }
