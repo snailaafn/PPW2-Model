@@ -24,8 +24,7 @@
             <div>Judul <input type="text" name="judul"></div>
             <div>Penulis <input type="text" name="penulis"></div>
             <div>Harga <input type="text" name="harga"></div>
-            <div>Tanggal Terbit <input type="date" name="tgl_terbit"
-                placeholder="yyyy/mm/dd"></div>
+            <div>Tanggal Terbit <input type="date" name="tgl_terbit" placeholder="yyyy/mm/dd"></div>
             <button type="submit">Simpan</button>
             <a href="{{'/book'}}">Kembali</a>
         </form>

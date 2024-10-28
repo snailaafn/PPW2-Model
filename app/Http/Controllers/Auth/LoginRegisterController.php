@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
+use Auth;
+use Hash;
 use Illuminate\Http\Request;
 
 class LoginRegisterController extends Controller
@@ -33,6 +36,7 @@ class LoginRegisterController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
+        //ketika berhasil register maka otomatis langsung login
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();

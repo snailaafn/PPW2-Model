@@ -92,9 +92,6 @@ class BukuController extends Controller
             $buku->save();
             return redirect('/book')->with('pesan', 'Buku berhasil diperbarui');
         }
-        //  else {
-        //     return redirect('/book')->with('error', 'Buku tidak ditemukan');
-        // }
     }
 
 
