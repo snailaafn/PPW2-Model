@@ -18,7 +18,8 @@ use App\Http\Controllers\SendEmailController;
 */
 
 
-Route::get('/book', [BukuController::class, 'index']);
+Route::get('/book', [BukuController::class, 'index'])->name('buku.index');
+
 Route::get('/book/create', [BukuController::class, 'create'])->name('buku.create');
 Route::post('/book', [BukuController::class, 'store'])->name('buku.store');
 Route::delete('/book/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
