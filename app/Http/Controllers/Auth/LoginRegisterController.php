@@ -15,7 +15,7 @@ class LoginRegisterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except([
+        $this->middleware('auth')->except([
             'logout', 'dashboard'
         ]);
     }

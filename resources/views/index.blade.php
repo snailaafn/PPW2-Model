@@ -46,7 +46,7 @@
                 <th>Penulis</th>
                 <th>Harga</th>
                 <th>Tanggal Terbit</th>
-                @if(Auth::check())
+                @if(Auth::check() && Auth::user()->level == 'admin')
                     <th>Aksi</th>
                 @endif
             </tr>
