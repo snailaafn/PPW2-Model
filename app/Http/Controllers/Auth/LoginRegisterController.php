@@ -10,13 +10,14 @@ use Auth;
 use Hash;
 use Illuminate\Http\Request;
 use Mail;
+use Illuminate\Support\Facades\Storage;
 
 class LoginRegisterController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth')->except([
-            'logout', 'dashboard'
+            'login', 'register', 'authenticate'
         ]);
     }
 
@@ -73,6 +74,8 @@ class LoginRegisterController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
+        // dd($request->email);
 
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();

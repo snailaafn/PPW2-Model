@@ -39,9 +39,13 @@
     @endif
 
     <table border="1" class="table table-striped" id="datatable">
+        @if(Auth::check() && Auth::user()->level == 'admin')
+        <a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Buku</</a>
+        @endif
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Photo</th>
                 <th>Judul Buku</th>
                 <th>Penulis</th>
                 <th>Harga</th>
@@ -55,6 +59,7 @@
             @foreach ($data_buku as $index => $buku)
                 <tr>
                     <td class="text-center">{{ $index + 1 }}</td>
+                    <td><img src="{{asset('storage/gallery_image/'.$buku->photo )}}" width="150px"></td>
                     <td>{{ $buku->judul }}</td>
                     <td>{{ $buku->penulis }}</td>
                     <td>{{ "Rp " . number_format($buku->harga, 0, ',', '.') }}</td>
@@ -72,6 +77,11 @@
                             @method('GET')
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </form>
+                        <form>
+                            <button type="submit" class="btn btn-primary">Detail</button>
+                        </form>
+
+
                     </td>
                     @endif
                 </tr>

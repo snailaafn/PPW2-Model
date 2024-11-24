@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string(column: 'judul');
-            $table->string('penulis');
-            $table->integer('harga');
-            $table->date('tgl_terbit');
-            $table->string(column: 'photo');
+            $table->string('title', 200);
+            $table->mediumText('description')->nullable();
+            $table->string('picture')->nullable();
             $table->timestamps();
-        });
+           });
     }
 
     /**
@@ -27,7 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
-
+        Schema::dropIfExists('posts');
     }
 };

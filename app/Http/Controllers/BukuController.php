@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use App\Models\Book;
+use App\Models\User;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 class BukuController extends Controller
 {
@@ -23,6 +28,16 @@ class BukuController extends Controller
             $res++;
             $total+=$buku -> harga;
         }
+
+        // $array = [
+        //     'key' => 1234,
+        //     'key2' => [
+
+        //     ]
+        //     ];
+        //     // echo $array;
+        //     $json = json_encode($array);
+        //     echo $json;
 
         return view('index', compact('data_buku', 'jumlah_buku', 'total'));
     }
@@ -42,13 +57,44 @@ class BukuController extends Controller
             'penulis' => 'required|string|max:30',
             'harga' => 'required|numeric',
             'tgl_terbit' => 'required|date',
+            'photo' => 'image|nullable|max:1999'
+
         ]);
+
+        $filenameSimpan = 'noimage.png';
+        $filenameSquare = null;
+
+        if ($request->hasFile('photo')) {
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $basename = uniqid() . time();
+            // $smallFilename = "small_{$basename}.{$extension}";
+            // $mediumFilename = "medium_{$basename}.{$extension}";
+            // $largeFilename = "large_{$basename}.{$extension}";
+            $filenameSimpan = "{$basename}.{$extension}";
+            $path = $request->file('photo')->storeAs('gallery_image', $filenameSimpan);
+            //Resize gambar untuk square
+            $filenameSquare = "{$basename}_square.{$extension}";
+            $squarePath = public_path("storage/gallery_image/square/{$filenameSquare}");
+             // Proses resize menggunakan Intervention Image
+            // $image = Image::make($filenameWithExt->getRealPath());
+            // $image->fit(300, 300); // Resize menjadi 300x300
+            // $image->save($squarePath);
+
+        // Buat directory "gallery_image/square" jika belum ada
+            if (!file_exists(public_path('storage/gallery_image/square'))) {
+                mkdir(public_path('storage/gallery_image/square'), 0755, true);
+            }
+        }
+
 
         $buku = new Book();
         $buku->judul = $request->judul;
         $buku->penulis = $request->penulis;
         $buku->harga = $request->harga;
         $buku->tgl_terbit = $request->tgl_terbit;
+        $buku->photo = $filenameSquare;
         $buku->save();
 
         return redirect('/book')->with('pesan', 'Data Buku berhasil di Simpan');
@@ -82,6 +128,21 @@ class BukuController extends Controller
             'penulis' => 'required|string|max:30',
             'harga' => 'required|numeric',
             'tgl_terbit' => 'required|date',
+            'photo' => 'image|nullable|max:19999'
+        ]);
+        if ($request->hasFile('photo')){
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $filenameSimpan = $filename . '_' . time() . '.' . $extension;
+            $path = $request->file('photo')->storeAs('photos', $filenameSimpan);
+        }
+
+        User::create([
+            'name' => $request->name,
+            'email' =>  $request->email,
+            'password' => Hash::make($request->password),
+            'photo' => $path
         ]);
 
         if ($buku) {

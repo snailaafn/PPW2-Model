@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">Register</div>
             <div class="card-body">
-                <form action="{{ route('store-regis')}}" method="post">
+                <form action="{{ route('store-regis')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
@@ -43,6 +43,12 @@
                             <input type="password" class="form-control"  id="password_confirmation" name="password_confirmation">
                         </div>
                     </div>
+                    {{-- <div class="mb-3 row">
+                        <label for="level" class="col-md-4 col-form-label text-md-end text-start">Level</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control"  id="level" name="level">
+                        </div>
+                    </div> --}}
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-primaary" value="Register">
                     </div>
