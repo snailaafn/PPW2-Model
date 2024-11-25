@@ -21,22 +21,6 @@
                     <th>Jurusan</th>
                 </tr>
             </thead>
-            {{-- <tbody>
-                @if (!empty($mahasiswa))
-                @foreach($mahasiswa as $index => $item)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $item['nama'] }}</td>
-                    <td>{{ $item['nim'] }}</td>
-                    <td>{{ $item['jurusan'] }}</td>
-                </tr>
-                @endforeach
-                @else
-                <tr>
-                    <td colspan="4">Tidak ada data mahasiswa.</td>
-                </tr>
-                @endif
-            </tbody> --}}
             <tbody id="mahasiswa-list"></tbody>
         </table>
     </div>
@@ -47,6 +31,7 @@
             .then(response => response.json())
             .then(data => {
                 let mahasiswaList = document.getElementById('mahasiswa-list');
+                mahasiswaList.innerHTML = ''; // Clear existing data
                 data.forEach((item, index) => {
                     let row = document.createElement('tr');
                     row.innerHTML = `

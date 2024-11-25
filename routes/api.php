@@ -27,3 +27,4 @@ Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show']); // Get sing
 Route::post('/mahasiswa', [MahasiswaController::class, 'store']); // Create data
 Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'update']); // Update data
 Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy']); // Delete data
+

@@ -10,12 +10,8 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-           // Mengambil data mahasiswa dari API
-           $response = Http::get('http://localhost/api/mahasiswa');
-           $mahasiswa = $response->json(); // Mengubah response menjadi array
-
-           // Menampilkan data mahasiswa di Blade
-           return view('mahasiswa', compact('mahasiswa'));
+        $mahasiswa = Mahasiswa::all();
+        return response()->json($mahasiswa);
 
     }
 
